@@ -8,13 +8,18 @@ public class asteroide : MonoBehaviour
     private Rigidbody2D asteroideRB;
     private BoxCollider2D asteroideCol;
     private gatinhoMovimento gatinhoMovimento;
+    private gameManager gameManager;
 
     [Header("Asteroide")]
     private float velocidade;
     [SerializeField] private float velocidadeMin;
     [SerializeField] private float velocidadeMax;
     [SerializeField] private float danoAsteroide;
+    [SerializeField] private float vidaMaximaAsteroide;
+    [SerializeField] private float vidaAtualAsteroide;
     [SerializeField] private float despawnSegundos;
+    [SerializeField] private Sprite[] asteroideSprite;
+    [SerializeField] private GameObject particulaPoeiraPrefab;
 
     void Start()
     {
@@ -22,19 +27,37 @@ public class asteroide : MonoBehaviour
         asteroideCol = GetComponent<BoxCollider2D>();
         asteroideRB = GetComponent<Rigidbody2D>();
 
+        vidaAtualAsteroide = vidaMaximaAsteroide;
         velocidade = Random.Range(velocidadeMin, velocidadeMax);
+        GetComponent<SpriteRenderer>().sprite = asteroideSprite[Random.Range(0,asteroideSprite.Length)];
 
         Invoke("DestruirAsteroide", despawnSegundos);
     }
 
-    void Update()
+    private void Update()
     {
+        if(vidaAtualAsteroide <= 0)
+        {
+            gameManager.AumentarPontuacao(Mathf.RoundToInt(50f * danoAsteroide));
+            DestruirAsteroide();
+        }
+
         MovimentoAsteroide();
     }
 
-    void MovimentoAsteroide()
+    private void MovimentoAsteroide()
     {
         transform.position += new Vector3(0, -velocidade, 0) * gatinhoMovimento.transform.position.y / 2 * Time.deltaTime;
+    }
+
+    public void LevarDano(float dano)
+    {
+        vidaAtualAsteroide -= dano;
+    }
+
+    public void setarGameManager(gameManager gameManagerSetado)
+    {
+        gameManager = gameManagerSetado;
     }
 
     private void OnTriggerEnter2D(Collider2D colisao)
@@ -42,12 +65,13 @@ public class asteroide : MonoBehaviour
         if (colisao.CompareTag("Player"))
         {
             colisao.gameObject.GetComponent<gatinhoVida>().LevarDano(danoAsteroide);
-            Destroy(gameObject);
+            DestruirAsteroide();
         }
     }
 
-    public void DestruirAsteroide()
+    private void DestruirAsteroide()
     {
+        Instantiate(particulaPoeiraPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

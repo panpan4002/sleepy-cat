@@ -6,14 +6,19 @@ using UnityEngine;
 public class projetilGatinho : MonoBehaviour
 {
     [Header("Componentes")]
+    [SerializeField] private GameObject particulaColisaoPrefab;
+
     private Rigidbody2D projetilRB;
     private BoxCollider2D projetilCol;
-    [SerializeField] private gatinho gatinho; //= GameObject.Find("Gatinho");
+    private gatinho gatinho; //= GameObject.Find("Gatinho");
     private gameManager gameManager;
 
     [Header("Projetil")]
-    public float velocidadeProjetil;
-    public float despawnSegundos;
+    private float danoProjetil;
+    private float velocidadeProjetil;
+    [SerializeField] private float despawnSegundos;
+
+    [SerializeField] private Sprite[] projetilSprite;
 
     void Start()
     {
@@ -35,6 +40,13 @@ public class projetilGatinho : MonoBehaviour
         gatinho = gatinhoSetado;
         gameManager = gameManagerSetado;
     }
+
+    public void setarProjetil(float dano, float velocidade, int sprite)
+    {
+        danoProjetil = dano;
+        velocidadeProjetil = velocidade;
+        GetComponent<SpriteRenderer>().sprite = projetilSprite[sprite];
+    }
     
     void Destruir()
     {
@@ -45,9 +57,21 @@ public class projetilGatinho : MonoBehaviour
     {
         if(colisao.CompareTag("Asteroide"))
         {
-            colisao.gameObject.GetComponent<asteroide>().DestruirAsteroide();
-            gameManager.SetarPontuacao(5);
-            Destroy(gameObject);
+            colisao.gameObject.GetComponent<asteroide>().LevarDano(danoProjetil);
+            Instantiate(particulaColisaoPrefab, transform.position, Quaternion.identity);
+            Destruir();
+        }
+
+        if (colisao.CompareTag("Inimigo"))
+        {
+            colisao.gameObject.GetComponent<inimigo>().LevarDano(danoProjetil);
+            Instantiate(particulaColisaoPrefab, transform.position, Quaternion.identity);
+            Destruir();
+        }
+
+        if (colisao != null)
+        {
+
         }
     }
 }

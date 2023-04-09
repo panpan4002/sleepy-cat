@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
+  m_Sprite: {fileID: 1541976075, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 8, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,14 +125,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
+    oldSize: {x: 8, y: 8}
+    newSize: {x: 8, y: 8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
 --- !u!114 &2553769085953220836
 MonoBehaviour:
@@ -149,4 +149,12 @@ MonoBehaviour:
   velocidadeMin: 5
   velocidadeMax: 10
   danoAsteroide: 3
+  vidaMaximaAsteroide: 8
+  vidaAtualAsteroide: 0
   despawnSegundos: 10
+  asteroideSprite:
+  - {fileID: 1541976075, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}
+  - {fileID: -244636835, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}
+  - {fileID: -600348698, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}
+  - {fileID: 1533070384, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}
+  particulaPoeiraPrefab: {fileID: 942365516783203933, guid: 372b3c427b65e21478e4a9638eb7fad3, type: 3}

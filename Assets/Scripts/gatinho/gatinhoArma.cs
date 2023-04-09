@@ -5,18 +5,42 @@ using UnityEngine;
 public class gatinhoArma : MonoBehaviour
 {
     [Header("Componentes")]
-    gatinho gatinho;
-    private gameManager gameManager;
     [SerializeField] private AudioClip[] sonsArmas;
+    [SerializeField] private GameObject projetilPrefab;
+    private gatinho gatinho;
+    private gameManager gameManager;
     private AudioSource audioSource;
 
-    [Header("Arma")]
-    public Transform[] armasTransform;
-    [SerializeField] private float cadenciaSegundos;
-    private float ultimoTiro;
+    [Header("Arma Base")]
+    [SerializeField] private float danoArmaBase;
+    [SerializeField] private float velocidadeProjetilArmaBase;
+    [SerializeField] private Transform armaTransform;
+    [SerializeField] private float cadenciaArma;
+    private float ultimoTiroArma;
 
-    [Header("Projetil")]
-    public GameObject projetilGatinho;
+    [Header("Arma Torreta")]
+    [SerializeField] private float danoTorreta;
+    [SerializeField] private float velocidadeProjetilTorreta;
+    [SerializeField] private Transform torretaTransform;
+    [SerializeField] private float cadenciaTorreta;
+    [SerializeField] private GameObject torreta;
+    private Transform alvoTorreta;
+    private float ultimoTiroTorreta;
+
+    [Header("Arma Mingun")]
+    [SerializeField] private float danoMinigun;
+    [SerializeField] private float velocidadeProjetilMinigun;
+    [SerializeField] private Transform[] minigunTransform;
+    [SerializeField] private float cadenciaMinigun;
+    private float ultimoTiroMinigun;
+
+    [Header("Arma Laser")]
+    [SerializeField] private float danoLaser;
+    [SerializeField] private float velocidadeProjetilLaser;
+    [SerializeField] private Transform[] laserTransform;
+    [SerializeField] private float cadenciaLaser;
+    private float ultimoTiroLaser;
+
     void Start()
     {
         gameManager = GameObject.Find("Kiwi").GetComponent<gameManager>();
@@ -29,25 +53,92 @@ public class gatinhoArma : MonoBehaviour
 
     void Update()
     {
-        
+        if(Input.GetKey(KeyCode.Space))
+        {
+            Atirar();
+        }
+
+        if (Input.GetKey(KeyCode.L))
+        {
+            if (gatinho.laser) ArmaLaser();
+        }
+
+        if (gatinho.torreta) Torreta();
     }
 
-    public int Atirar()
+    void Atirar()
     {
-        if(Time.time > ultimoTiro + cadenciaSegundos)
+        ArmaBase();
+        if(gatinho.minigun) ArmaMinigun();
+    }
+
+    void ArmaBase()
+    {
+        if(Time.time > ultimoTiroArma + cadenciaArma)
         {
-            foreach (Transform t in armasTransform)
+            GameObject projetilArmaBaseInstanciado = Instantiate(projetilPrefab, armaTransform.transform.position, armaTransform.transform.rotation);
+            projetilArmaBaseInstanciado.GetComponent<projetilGatinho>().setarComponentes(this.gatinho, this.gameManager);
+            projetilArmaBaseInstanciado.GetComponent<projetilGatinho>().setarProjetil(danoArmaBase, velocidadeProjetilArmaBase, 3);
+
+            audioSource.PlayOneShot(sonsArmas[0]);
+            gameManager.tirosArma++;
+            ultimoTiroArma = Time.time;
+        }
+    }
+
+    void ArmaMinigun()
+    {
+        if(Time.time > ultimoTiroMinigun + cadenciaMinigun)
+        {
+            foreach(Transform t in minigunTransform)
             {
-                GameObject projetilGatinhoInstanciado = Instantiate(projetilGatinho, t.transform.position, t.transform.rotation);
-                projetilGatinhoInstanciado.GetComponent<projetilGatinho>().setarComponentes(this.gatinho, this.gameManager);
+                GameObject projetilMinigunInstanciado = Instantiate(projetilPrefab, t.transform.position, t.transform.rotation);
+                projetilMinigunInstanciado.GetComponent<projetilGatinho>().setarComponentes(this.gatinho, this.gameManager);
+                projetilMinigunInstanciado.GetComponent<projetilGatinho>().setarProjetil(danoMinigun, velocidadeProjetilMinigun, 0);
             }
 
             audioSource.PlayOneShot(sonsArmas[0]);
-            
-            ultimoTiro = Time.time;
-            return 1;
+            gameManager.tirosMinigun++;
+            ultimoTiroMinigun = Time.time;
+        }
+    }
+
+    void ArmaLaser()
+    {
+        if (Time.time > ultimoTiroLaser + cadenciaLaser)
+        {
+            foreach (Transform t in laserTransform)
+            {
+                GameObject projetilLaserInstanciado = Instantiate(projetilPrefab, t.transform.position, t.transform.rotation);
+                projetilLaserInstanciado.GetComponent<projetilGatinho>().setarComponentes(this.gatinho, this.gameManager);
+                projetilLaserInstanciado.GetComponent<projetilGatinho>().setarProjetil(danoLaser, velocidadeProjetilLaser, 2);
+            }
+
+            audioSource.PlayOneShot(sonsArmas[0]);
+            gameManager.tirosLaser++;
+            ultimoTiroLaser = Time.time;
+        }
+    }
+
+    void Torreta()
+    {
+        GameObject[] inimigos = GameObject.FindGameObjectsWithTag("Inimigo");
+
+        foreach (GameObject inimigo in inimigos)
+        {
+            float distancia = Vector3.Distance(transform.position, inimigo.transform.position);
+            if (distancia < 10)
+            {
+                alvoTorreta = inimigo.transform;
+            }
         }
 
-        return 0;
+        if (alvoTorreta != null)
+        {
+
+            Vector3 direcao = alvoTorreta.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(direcao);
+            torreta.transform.rotation = Quaternion.Euler(0f, 0f, lookRotation.eulerAngles.y);
+        }
     }
 }

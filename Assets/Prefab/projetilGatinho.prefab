@@ -75,9 +75,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.4245283, g: 0, b: 0.081511624, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,8 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae220c656f274f4e8dc9dae3ef3982d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadeProjetil: 20
+  particulaColisaoPrefab: {fileID: 8568170499867112278, guid: e4fa77d6506fdf34bb90f117384c4c9d, type: 3}
   despawnSegundos: 3
+  projetilSprite:
+  - {fileID: 1850729766, guid: 8cf228c476a76f34eaa33742e7d91a63, type: 3}
+  - {fileID: -283904701, guid: 8cf228c476a76f34eaa33742e7d91a63, type: 3}
+  - {fileID: 1896131832, guid: 8cf228c476a76f34eaa33742e7d91a63, type: 3}
+  - {fileID: 1868367673, guid: 8cf228c476a76f34eaa33742e7d91a63, type: 3}
 --- !u!50 &4927087699564748158
 Rigidbody2D:
   serializedVersion: 4
