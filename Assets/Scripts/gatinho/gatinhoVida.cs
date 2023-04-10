@@ -19,11 +19,7 @@ public class gatinhoVida : MonoBehaviour
 
     void Update()
     {
-        if(vida <= 0) 
-        {
-            //Debug.Log("e morreu");
-            Time.timeScale = 0;
-        }
+        
     }
 
     public void LevarDano(float dano) 

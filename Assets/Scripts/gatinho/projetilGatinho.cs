@@ -7,7 +7,6 @@ public class projetilGatinho : MonoBehaviour
 {
     [Header("Componentes")]
     [SerializeField] private GameObject particulaColisaoPrefab;
-
     private Rigidbody2D projetilRB;
     private BoxCollider2D projetilCol;
     private gatinho gatinho; //= GameObject.Find("Gatinho");
@@ -50,6 +49,7 @@ public class projetilGatinho : MonoBehaviour
     
     void Destruir()
     {
+        Instantiate(particulaColisaoPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -58,20 +58,13 @@ public class projetilGatinho : MonoBehaviour
         if(colisao.CompareTag("Asteroide"))
         {
             colisao.gameObject.GetComponent<asteroide>().LevarDano(danoProjetil);
-            Instantiate(particulaColisaoPrefab, transform.position, Quaternion.identity);
             Destruir();
         }
 
         if (colisao.CompareTag("Inimigo"))
         {
             colisao.gameObject.GetComponent<inimigo>().LevarDano(danoProjetil);
-            Instantiate(particulaColisaoPrefab, transform.position, Quaternion.identity);
             Destruir();
-        }
-
-        if (colisao != null)
-        {
-
         }
     }
 }

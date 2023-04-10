@@ -24,9 +24,9 @@ public class fundoInfinito : MonoBehaviour
             velocidadeY = (0.5f * 5) / 4 * ParallaxY;
         }
 
-        else if(gatinhoMovimento.transform.position.y <= 3)
+        else if(gatinhoMovimento.transform.position.y <= 1)
         {
-            velocidadeY = (0.5f * 3) / 4 * ParallaxY;
+            velocidadeY = (0.5f * 1) / 4 * ParallaxY;
         }
 
         else

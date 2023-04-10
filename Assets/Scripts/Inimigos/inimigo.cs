@@ -47,36 +47,6 @@ public class inimigo : MonoBehaviour
         //Atacar();
     }
 
-    private void Atacar()
-    {
-        if(Time.time > ultimoAtaque + ataqueCD)
-        {
-            podeAtacar = true;
-        }
-
-        if (Vector3.Distance(transform.position, inimigoMovimento.alvo) <= 3 && podeAtacar)
-        {
-            inimigoMovimento.atacando = true;
-            ultimoAtaque = Time.time;
-            podeAtacar = false;
-            MovimentoAtaque();
-            Debug.Log("entrou no range");
-
-        }
-
-        else
-
-        {
-            inimigoMovimento.atacando = false;
-        }
-    }
-
-    private void MovimentoAtaque()
-    {
-        Vector3 direction = (inimigoMovimento.gatinhoTransform.position - transform.position).normalized;
-        inimigoRB.velocity = direction * inimigoMovimento.velocidade * Time.deltaTime;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))

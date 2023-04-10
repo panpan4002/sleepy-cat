@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Asteroide
   - Inimigo
+  - gameOver
   layers:
   - Default
   - TransparentFX

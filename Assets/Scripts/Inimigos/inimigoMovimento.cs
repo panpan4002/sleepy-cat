@@ -14,33 +14,37 @@ public class inimigoMovimento : MonoBehaviour
     [SerializeField] public float velocidade;
     [SerializeField] private float amplitudeZZ;
     [SerializeField] private float frequenciaZZ;
-    [HideInInspector] public Transform gatinhoTransform;
-    [HideInInspector] public Vector3 alvo;
+    private Transform gatinhoTransform;
+    private Vector3 alvo;
     [HideInInspector] public bool atacando;
 
-    private Vector3 startPosition;
     private float startTime;
 
     void Start()
     {
+        GameObject gatinhoObject = GameObject.Find("Gatinho");
+        gatinho = gatinhoObject.GetComponent<gatinho>();
+        gatinhoTransform = gatinho.transform;
+
         inimigoCol = GetComponent<BoxCollider2D>();
         inimigoRB = GetComponent<Rigidbody2D>();
 
-        startPosition = transform.position;
         startTime = Time.time;
+
+        float randomNumber = Random.Range(0, 2) * 2 - 1;
+        amplitudeZZ *= randomNumber;
     }
 
     void Update()
     {
-        alvo = new Vector3(gatinhoTransform.position.x, gatinhoTransform.position.y + 4, gatinhoTransform.position.z);
+        alvo = new Vector3(gatinhoTransform.position.x, gatinhoTransform.position.y + 2.5f, gatinhoTransform.position.z);
     }
 
     private void FixedUpdate()
     {
-        //if(!atacando)
-        //{
-            MovimentoZigZag();
-        //}
+
+        MovimentoZigZag();
+
     }
 
     private void MovimentoZigZag()

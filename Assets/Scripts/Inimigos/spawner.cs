@@ -7,11 +7,15 @@ public class spawner : MonoBehaviour
     [Header("Componentes")]
     private BoxCollider2D spawnArea;
     private gatinhoMovimento gatinhoMovimento;
-    [SerializeField] private gameManager gameManager;
+    private gameManager gameManager;
 
     [Header("Asteroide")]
     [SerializeField] private GameObject asteroidePrefab;
     [SerializeField] private float asteroideSpawnRate;
+
+    [Header("Inimigo")]
+    [SerializeField] private GameObject inimigoPrefab;
+    [SerializeField] private float inimigoSpawnRate;
 
     [Header("Melhorias")]
     [SerializeField] private GameObject melhoriaMK2Prefab;
@@ -28,8 +32,13 @@ public class spawner : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("Kiwi").GetComponent<gameManager>();
+
         spawnArea = GetComponent<BoxCollider2D>();
         StartCoroutine("SpawnAsteroide");
+
+        StartCoroutine("SpawnInimigo");
+
         StartCoroutine("SpawnMelhoriaMK2");
         StartCoroutine("SpawnMelhoriaMK3");
         StartCoroutine("SpawnMelhoriaTorreta");
@@ -55,7 +64,6 @@ public class spawner : MonoBehaviour
                 Vector2 spawnPosition = new Vector2(x, y);
 
                 GameObject melhoriaMK2Instanciada = Instantiate(melhoriaMK2Prefab, spawnPosition, Quaternion.identity);
-                //melhoriaMK2Instanciada.GetComponent<melhoria>().SetarMelhoria("MK2", 80, 30);
                 ultimaMelhoriaMK2 = melhoriaMK2Instanciada;
             }
             yield return null;
@@ -75,7 +83,6 @@ public class spawner : MonoBehaviour
                 Vector2 spawnPosition = new Vector2(x, y);
 
                 GameObject melhoriaMK3Instanciada = Instantiate(melhoriaMK3Prefab, spawnPosition, Quaternion.identity);
-                //melhoriaMK3Instanciada.GetComponent<melhoria>().SetarMelhoria("MK2", 80, 30);
                 ultimaMelhoriaMK3 = melhoriaMK3Instanciada;
             }
             yield return null;
@@ -86,7 +93,7 @@ public class spawner : MonoBehaviour
     {
         while (true)
         {
-            if (gameManager.pontuacao > 300 && !gameManager.gatinho.torreta && ultimaMelhoriaTorreta == null)
+            if (gameManager.pontuacao > 350 && !gameManager.gatinho.torreta && ultimaMelhoriaTorreta == null)
             {
                 Debug.Log("Torreta");
 
@@ -95,7 +102,6 @@ public class spawner : MonoBehaviour
                 Vector2 spawnPosition = new Vector2(x, y);
 
                 GameObject melhoriaTorretaInstanciada = Instantiate(melhoriaTorretaPrefab, spawnPosition, Quaternion.identity);
-                //melhoriaTorretaInstanciada.GetComponent<melhoria>().SetarMelhoria("MK2", 80, 30);
                 ultimaMelhoriaTorreta = melhoriaTorretaInstanciada;
             }
             yield return null;
@@ -115,7 +121,6 @@ public class spawner : MonoBehaviour
                 Vector2 spawnPosition = new Vector2(x, y);
 
                 GameObject melhoriaMinigunInstanciada = Instantiate(melhoriaMinigunPrefab, spawnPosition, Quaternion.identity);
-                //melhoriaMinigunInstanciada.GetComponent<melhoria>().SetarMelhoria("MK2", 80, 30);
                 ultimaMelhoriaMinigun = melhoriaMinigunInstanciada;
             }
             yield return null;
@@ -135,10 +140,21 @@ public class spawner : MonoBehaviour
                 Vector2 spawnPosition = new Vector2(x, y);
 
                 GameObject melhoriaLaserInstanciada = Instantiate(melhoriaLaserPrefab, spawnPosition, Quaternion.identity);
-                //melhoriaLaserInstanciada.GetComponent<melhoria>().SetarMelhoria("MK2", 80, 30);
                 ultimaMelhoriaLaser = melhoriaLaserInstanciada;
             }
             yield return null;
+        }
+    }
+
+    IEnumerator SpawnInimigo()
+    {
+        while (true)
+        {
+            float x = Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x);
+            float y = Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y);
+            Vector2 spawnPosition = new Vector2(x, y);
+            GameObject InimigoInstanciado = Instantiate(inimigoPrefab, spawnPosition, Quaternion.identity);
+            yield return new WaitForSeconds(inimigoSpawnRate);
         }
     }
 
@@ -146,7 +162,6 @@ public class spawner : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log("spawnou asteroide");
             float x = Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x);
             float y = Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y);
             Vector2 spawnPosition = new Vector2(x, y);

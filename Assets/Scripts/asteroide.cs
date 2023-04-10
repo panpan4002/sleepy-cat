@@ -38,7 +38,7 @@ public class asteroide : MonoBehaviour
     {
         if(vidaAtualAsteroide <= 0)
         {
-            gameManager.AumentarPontuacao(Mathf.RoundToInt(50f * danoAsteroide));
+            gameManager.AumentarPontuacao(Mathf.RoundToInt(10f * danoAsteroide));
             DestruirAsteroide();
         }
 
@@ -47,7 +47,12 @@ public class asteroide : MonoBehaviour
 
     private void MovimentoAsteroide()
     {
-        transform.position += new Vector3(0, -velocidade, 0) * gatinhoMovimento.transform.position.y / 2 * Time.deltaTime;
+        if(gatinhoMovimento.transform.position.y > 1)
+        {
+            transform.position += new Vector3(0, -velocidade, 0) * gatinhoMovimento.transform.position.y / 2 * Time.deltaTime;
+        }
+
+        else transform.position += new Vector3(0, -velocidade, 0) * 0.5f * Time.deltaTime;
     }
 
     public void LevarDano(float dano)
