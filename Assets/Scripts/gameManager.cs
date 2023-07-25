@@ -13,13 +13,11 @@ public class gameManager : MonoBehaviour
     private TextMeshProUGUI tempoTexto;
     private TextMeshProUGUI pontuacaoTexto;
     private Slider vidaSlider;
+
     [HideInInspector] public int tirosArma;
     [HideInInspector] public int tirosMinigun;
     [HideInInspector] public int tirosTorreta;
     [HideInInspector] public int tirosLaser;
-
-    [Header("Menu")]
-    VideoPlayer Cutscene;
 
     [Header("Gatinho")]
     [HideInInspector] public gatinho gatinho;
@@ -29,50 +27,43 @@ public class gameManager : MonoBehaviour
 
     [HideInInspector] public int pontuacao = 0;
 
-    public bool cena0 = false;
-    public bool cena1 = false;
-
     private UI UI;
 
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        /*DontDestroyOnLoad(this.gameObject);
 
         if (FindObjectOfType<gameManager>() != this)
         {
             Destroy(gameObject);
             return;
-        }
+        }*/
     }
 
     void Start()
     {
+        GameObject gatinhoGameObject = GameObject.FindWithTag("Player");
+        gatinho = gatinhoGameObject.GetComponent<gatinho>();
 
+        GameObject gatinhoHUDObject = GameObject.Find("HUD");
+        vidaSlider = gatinhoHUDObject.GetComponentInChildren<Slider>();
+        pontuacaoTexto = GameObject.Find("Pontuacao").GetComponent<TextMeshProUGUI>();
+        tempoTexto = GameObject.Find("Tempo").GetComponent<TextMeshProUGUI>();
+
+        gatinhoArma = gatinhoGameObject.GetComponent<gatinhoArma>();
+        gatinhoMovimento = gatinhoGameObject.GetComponent<gatinhoMovimento>();
+        gatinhoVida = gatinhoGameObject.gameObject.GetComponent<gatinhoVida>();
+
+        UI = GameObject.Find("UI").GetComponent<UI>();
+
+        pontuacao = 0;
     }
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            if (!cena0) Cena0Start();
-
-        }
-
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if (!cena1) Cena1Start();  
-
-            Temporizador();
-            pontuacaoTexto.text = pontuacao.ToString();
-            if(gatinhoVida.vida > 0) VidaSlider();
-        }
-
-
-    }
-
-    private void FixedUpdate()
-    {
-   
+        Temporizador();
+        pontuacaoTexto.text = pontuacao.ToString();
+        if (gatinhoVida.vida > 0) VidaSlider();
     }
 
     public void AumentarPontuacao(int pontuacaoAumentar)
@@ -111,122 +102,4 @@ public class gameManager : MonoBehaviour
     {
         Application.Quit();
     }
-
-    void Cena0Start()
-    {
-        Cutscene = GameObject.Find("Cutscene").GetComponent<VideoPlayer>();
-
-        float targetAspect = 4.0f / 3.0f;
-        float windowAspect = (float)Screen.width / (float)Screen.height;
-        float scaleHeight = windowAspect / targetAspect;
-
-        if (scaleHeight < 1.0f)
-        {
-            Camera.main.rect = new Rect(0.0f, (1.0f - scaleHeight) / 2.0f, 1.0f, scaleHeight);
-        }
-        else
-        {
-            float scaleWidth = 1.0f / scaleHeight;
-            Camera.main.rect = new Rect((1.0f - scaleWidth) / 2.0f, 0.0f, scaleWidth, 1.0f);
-        }
-    }
-
-    void Cena1Start()
-    {
-        cena1 = true;
-
-        GameObject gatinhoGameObject = GameObject.FindWithTag("Player");
-        gatinho = gatinhoGameObject.GetComponent<gatinho>();
-
-        GameObject gatinhoHUDObject = GameObject.Find("HUD");
-        vidaSlider = gatinhoHUDObject.GetComponentInChildren<Slider>();
-        pontuacaoTexto = GameObject.Find("Pontuacao").GetComponent<TextMeshProUGUI>();
-        tempoTexto = GameObject.Find("Tempo").GetComponent<TextMeshProUGUI>();
-
-        gatinhoArma = gatinhoGameObject.GetComponent<gatinhoArma>();
-        gatinhoMovimento = gatinhoGameObject.GetComponent<gatinhoMovimento>();
-        gatinhoVida = gatinhoGameObject.gameObject.GetComponent<gatinhoVida>();
-
-        UI = GameObject.Find("UI").GetComponent<UI>();
-
-        tirosArma = 0;
-        tirosMinigun = 0;
-        tirosTorreta = 0;
-        tirosLaser = 0;
-
-        pontuacao = 0;
-
-        float targetAspect = 4.0f / 3.0f;
-        float windowAspect = (float)Screen.width / (float)Screen.height;
-        float scaleHeight = windowAspect / targetAspect;
-
-        if (scaleHeight < 1.0f)
-        {
-            Camera.main.rect = new Rect(0.0f, (1.0f - scaleHeight) / 2.0f, 1.0f, scaleHeight);
-        }
-        else
-        {
-            float scaleWidth = 1.0f / scaleHeight;
-            Camera.main.rect = new Rect((1.0f - scaleWidth) / 2.0f, 0.0f, scaleWidth, 1.0f);
-        }
-    }
-
-    /*IEnumerator PausaTempo()
-    {
-        StopCoroutine(RestauraTempo());
-        Time.timeScale = 1f;
-
-        if (!estaPausando)
-        {
-
-            estaPausando = true;
-        }
-
-        yield return null;
-    }
-
-    IEnumerator RestauraTempo()
-    {
-        StopCoroutine(PausaTempo());
-        Time.timeScale = 0f;
-        Debug.Log("Polo");
-
-        if (!estaDespausando)
-        {
-
-            estaDespausando = true;
-        }
-
-        yield return null;
-    }
-
-    IEnumerator Tempo()
-    {
-        while (true)
-        {
-            if (estaPausando)
-            {
-                Time.timeScale -= Time.deltaTime * 3f;
-
-                if (Time.timeScale <= 0f)
-                {
-                    Time.timeScale = 0f;
-                    estaPausando = false;
-                }
-            }
-
-            if (estaDespausando)
-            {
-                Time.timeScale += Time.deltaTime * 3f;
-
-                if (Time.timeScale >= 1f)
-                {
-                    Time.timeScale = 1f;
-                    estaPausando = false;
-                }
-            }
-
-            yield return null;
-        }
-    }*/
 }

@@ -70,17 +70,7 @@ public class gatinhoArma : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
-        {
-            Atirar();
-        }
-
-        if (Input.GetKey(KeyCode.L))
-        {
-            if (gatinho.laser) ArmaLaser();
-        }
-
-        if (gatinho.torreta) Torreta();
+        Atirar(); 
 
         temperaturaMinigun = Mathf.Max(0f, temperaturaMinigun - 2 * Time.deltaTime);
         float porcentagemAquecimento = temperaturaMinigun / temperaturaMaximaMinigun;
@@ -92,6 +82,8 @@ public class gatinhoArma : MonoBehaviour
     {
         ArmaBase();
         if(gatinho.minigun) ArmaMinigun();
+        if (gatinho.torreta) Torreta();
+        if (gatinho.laser) ArmaLaser();
     }
 
     void ArmaBase()

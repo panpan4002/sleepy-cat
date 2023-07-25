@@ -37,13 +37,13 @@ public class spawner : MonoBehaviour
         spawnArea = GetComponent<BoxCollider2D>();
         StartCoroutine("SpawnAsteroide");
 
-        StartCoroutine("SpawnInimigo");
+        //StartCoroutine("SpawnInimigo");
 
-        StartCoroutine("SpawnMelhoriaMK2");
-        StartCoroutine("SpawnMelhoriaMK3");
-        StartCoroutine("SpawnMelhoriaTorreta");
-        StartCoroutine("SpawnMelhoriaLaser");
-        StartCoroutine("SpawnMelhoriaMinigun");
+        //StartCoroutine("SpawnMelhoriaMK2");
+        //StartCoroutine("SpawnMelhoriaMK3");
+        //StartCoroutine("SpawnMelhoriaTorreta");
+        //StartCoroutine("SpawnMelhoriaLaser");
+        //StartCoroutine("SpawnMelhoriaMinigun");
     }
 
     void Update()
