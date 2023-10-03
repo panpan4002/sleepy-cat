@@ -8,7 +8,7 @@ public class inimigoMovimento : MonoBehaviour
     [Header("Componentes")]
     private BoxCollider2D inimigoCol;
     private Rigidbody2D inimigoRB;
-    private gatinho gatinho;
+    private kitten kitten;
 
     [Header("Movimento")]
     [SerializeField] public float velocidade;
@@ -23,8 +23,8 @@ public class inimigoMovimento : MonoBehaviour
     void Start()
     {
         GameObject gatinhoObject = GameObject.Find("Gatinho");
-        gatinho = gatinhoObject.GetComponent<gatinho>();
-        gatinhoTransform = gatinho.transform;
+        kitten = gatinhoObject.GetComponent<kitten>();
+        gatinhoTransform = kitten.transform;
 
         inimigoCol = GetComponent<BoxCollider2D>();
         inimigoRB = GetComponent<Rigidbody2D>();

@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/UI%20Toolkit/menuUI.uss?fileID=7433441132597879392&amp;guid=928b01d2d08d7214da575ce537ef4f46&amp;type=3#menuUI" />
+    <ui:VisualElement name="UIContainer" style="height: 100%; width: 100%; display: flex;">
+        <ui:IMGUIContainer name="Logo" style="height: 20%; align-items: flex-start; justify-content: center; margin-top: 5%; background-image: url(&apos;project://database/Assets/Sprites/Logos/logo.png?fileID=21300000&amp;guid=a2f65f4defd5e9b4d84c4124c2f4ac52&amp;type=3#logo&apos;); margin-left: 5%; margin-right: 5%; margin-bottom: 5%; width: 90%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; -unity-background-scale-mode: scale-to-fit;" />
+        <ui:VisualElement name="Spaceship" style="background-image: url(&apos;project://database/Assets/Sprites/gatinho/nave.ase?fileID=9077405670206859597&amp;guid=d292865e9bc7a9448b0045c350c78a51&amp;type=3#nave&apos;); width: 80%; height: 30%; margin-left: 10%; margin-right: 10%; margin-top: 10%; margin-bottom: 10%; -unity-background-scale-mode: scale-to-fit;" />
+        <ui:VisualElement name="ButtonContainer" style="bottom: 0; margin-top: 10%; margin-bottom: 10%; margin-left: 10%; margin-right: 10%; height: 30%; width: 80%;">
+            <ui:Button text="MISSÃO" display-tooltip-when-elided="true" name="missionBtn" focusable="true" class="button" style="display: flex; transition-property: all; transition-duration: 0s; transition-timing-function: ease; transition-delay: 0s;" />
+            <ui:Button text="MODO LIVRE" display-tooltip-when-elided="true" name="freeBtn" class="button" />
+            <ui:Button text="CENTRO DE &#10;OPERAÇÕES" display-tooltip-when-elided="true" name="missionsBtn" class="button" style="display: flex;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button display-tooltip-when-elided="true" name="skinBtn" style="-unity-font: url(&apos;project://database/Assets/Fontes/Retrolab.ttf?fileID=12800000&amp;guid=e501a4eeaa5353348b2d5bf31cad6da6&amp;type=3#Retrolab&apos;); display: flex; background-image: url(&apos;project://database/Assets/Sprites/UI/skin.png?fileID=21300000&amp;guid=fcd5140410248a742b0e0857c7cfc10b&amp;type=3#skin&apos;); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; background-color: rgba(17, 24, 41, 0); width: 10%; height: 10%; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; position: absolute; bottom: 0; right: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 5%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%; -unity-background-scale-mode: scale-to-fit;" />
+    <ui:Button display-tooltip-when-elided="true" name="settingsBtn" enable-rich-text="true" style="-unity-font: url(&apos;project://database/Assets/Fontes/Retrolab.ttf?fileID=12800000&amp;guid=e501a4eeaa5353348b2d5bf31cad6da6&amp;type=3#Retrolab&apos;); -unity-text-align: middle-center; white-space: nowrap; display: flex; background-image: url(&apos;project://database/Assets/Sprites/UI/settings.png?fileID=21300000&amp;guid=2856cce4c1e7650409d34a7198466a7b&amp;type=3#settings&apos;); width: 10%; height: 10%; margin-left: 5%; margin-right: 5%; margin-top: 5%; margin-bottom: 5%; background-color: rgba(0, 0, 0, 0); -unity-background-scale-mode: scale-to-fit; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; position: absolute; right: auto; top: auto; bottom: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+    <ui:VisualElement name="SkinChangerContainer" style="width: 100%; height: 100%; display: none;">
+        <ui:IMGUIContainer style="background-image: url(&apos;project://database/Assets/Sprites/skins/1.png?fileID=21300000&amp;guid=050942bedb0d6d34594cd633332cd773&amp;type=3#1&apos;); width: 50%; height: 50%; margin-left: auto; margin-right: auto; margin-top: 5%; margin-bottom: 5%; -unity-background-scale-mode: scale-to-fit;" />
+        <ui:ScrollView vertical-scroller-visibility="Hidden" mode="Horizontal" horizontal-scroller-visibility="Hidden" name="SkinScroll" mouse-wheel-scroll-size="75" style="height: 100px;">
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+            <ui:VisualElement class="skinPreview" />
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

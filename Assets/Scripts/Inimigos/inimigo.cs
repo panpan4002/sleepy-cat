@@ -8,7 +8,7 @@ public class inimigo : MonoBehaviour
     private inimigoMovimento inimigoMovimento;
     private BoxCollider2D inimigoCol;
     private Rigidbody2D inimigoRB;
-    private gatinho gatinho;
+    private kitten kitten;
     private gameManager gameManager;
 
     [Header("Inimigo")]
@@ -27,7 +27,7 @@ public class inimigo : MonoBehaviour
         gameManager = gameManagerObject.GetComponent<gameManager>();
 
         GameObject gatinhoObject = GameObject.Find("Gatinho");
-        gatinho = gatinhoObject.GetComponent<gatinho>();
+        kitten = gatinhoObject.GetComponent<kitten>();
 
         inimigoMovimento = GetComponent<inimigoMovimento>();
         inimigoCol = GetComponent<BoxCollider2D>();
@@ -40,7 +40,6 @@ public class inimigo : MonoBehaviour
     {
         if(vidaAtual <= 0)
         {
-            gameManager.AumentarPontuacao(Mathf.RoundToInt(10 * dano));
             DestruirInimigo();
         }
 
@@ -55,10 +54,10 @@ public class inimigo : MonoBehaviour
         }
     }
 
-    public void SetarComponentes(gatinho gatinhoSetado, gameManager gameManagerSetado)
+    public void SetarComponentes(kitten gatinhoSetado, gameManager gameManagerSetado)
     {
         gameManager = gameManagerSetado;
-        gatinho = gatinhoSetado;
+        kitten = gatinhoSetado;
     }
 
     public void LevarDano(float danoLevar)

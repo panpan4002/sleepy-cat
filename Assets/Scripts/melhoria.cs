@@ -11,7 +11,7 @@ public class melhoria : MonoBehaviour
     private BoxCollider2D melhoriaCol;
     private Rigidbody2D melhoriaRB;
     private gameManager gameManager;
-    private gatinho gatinho;
+    private kitten kitten;
 
     [Header("Melhoria")]
     [SerializeField] private string melhoriaNome;
@@ -24,7 +24,7 @@ public class melhoria : MonoBehaviour
         gameManager = gameManagerObject.GetComponent<gameManager>();
 
         GameObject gatinhoObject = GameObject.Find("Gatinho");
-        gatinho = gatinhoObject.GetComponent<gatinho>();
+        kitten = gatinhoObject.GetComponent<kitten>();
 
         melhoriaSR = GetComponent<SpriteRenderer>();
         melhoriaCol = GetComponent<BoxCollider2D>();
@@ -74,26 +74,26 @@ public class melhoria : MonoBehaviour
             switch (melhoriaNome)
             {
                 case "MK2":
-                    collision.GetComponent<gatinho>().MK2 = true;
+                    collision.GetComponent<kitten>().MK2 = true;
 
                     break;
 
                 case "MK3":
-                    collision.GetComponent<gatinho>().MK3 = true;
+                    collision.GetComponent<kitten>().MK3 = true;
                     break;
 
                 case "torreta":
-                    collision.GetComponent<gatinho>().torreta = true;
+                    collision.GetComponent<kitten>().torreta = true;
                     break;
 
                 case "minigun":
-                    collision.GetComponent<gatinho>().minigun = true;
+                    collision.GetComponent<kitten>().minigun = true;
                     break;
 
                 case "laser":
-                    if (collision.GetComponent<gatinho>().MK3)
+                    if (collision.GetComponent<kitten>().MK3)
                     {
-                        collision.GetComponent<gatinho>().laser = true;
+                        collision.GetComponent<kitten>().laser = true;
                     }
 
                     break;

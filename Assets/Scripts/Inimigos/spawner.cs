@@ -6,30 +6,11 @@ public class spawner : MonoBehaviour
 {
     [Header("Componentes")]
     private BoxCollider2D spawnArea;
-    private gatinhoMovimento gatinhoMovimento;
     private gameManager gameManager;
 
     [Header("Asteroide")]
     [SerializeField] private GameObject asteroidePrefab;
     [SerializeField] private float asteroideSpawnRate;
-
-    [Header("Inimigo")]
-    [SerializeField] private GameObject inimigoPrefab;
-    [SerializeField] private float inimigoSpawnRate;
-
-    [Header("Melhorias")]
-    [SerializeField] private GameObject melhoriaMK2Prefab;
-    [SerializeField] private GameObject melhoriaMK3Prefab;
-    [SerializeField] private GameObject melhoriaTorretaPrefab;
-    [SerializeField] private GameObject melhoriaMinigunPrefab;
-    [SerializeField] private GameObject melhoriaLaserPrefab;
-
-    private GameObject ultimaMelhoriaMK2;
-    private GameObject ultimaMelhoriaMK3;
-    private GameObject ultimaMelhoriaTorreta;
-    private GameObject ultimaMelhoriaMinigun;
-    private GameObject ultimaMelhoriaLaser;
-
     void Start()
     {
         gameManager = GameObject.Find("Kiwi").GetComponent<gameManager>();
@@ -38,7 +19,6 @@ public class spawner : MonoBehaviour
         StartCoroutine("SpawnAsteroide");
 
         //StartCoroutine("SpawnInimigo");
-
         //StartCoroutine("SpawnMelhoriaMK2");
         //StartCoroutine("SpawnMelhoriaMK3");
         //StartCoroutine("SpawnMelhoriaTorreta");
@@ -51,7 +31,7 @@ public class spawner : MonoBehaviour
         
     }
 
-    IEnumerator SpawnMelhoriaMK2()
+    /*IEnumerator SpawnMelhoriaMK2()
     {
         while (true)
         {
@@ -156,7 +136,7 @@ public class spawner : MonoBehaviour
             GameObject InimigoInstanciado = Instantiate(inimigoPrefab, spawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(inimigoSpawnRate);
         }
-    }
+    }*/
 
     IEnumerator SpawnAsteroide()
     {
@@ -166,7 +146,7 @@ public class spawner : MonoBehaviour
             float y = Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y);
             Vector2 spawnPosition = new Vector2(x, y);
             GameObject asteroideInstanciado = Instantiate(asteroidePrefab, spawnPosition, Quaternion.identity);
-            asteroideInstanciado.GetComponent<asteroide>().setarGameManager(gameManager);
+            //asteroideInstanciado.GetComponent<asteroide>().setarGameManager(gameManager);
             yield return new WaitForSeconds(asteroideSpawnRate);
         }
     }

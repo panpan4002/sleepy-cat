@@ -146,12 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbbe2ad08f88ec4a9987ce5ef768050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadeMin: 5
-  velocidadeMax: 10
+  speed: {x: 5, y: 10}
   danoAsteroide: 3
   vidaMaximaAsteroide: 8
   vidaAtualAsteroide: 0
-  despawnSegundos: 10
+  despawn: 10
   asteroideSprite:
   - {fileID: 1541976075, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}
   - {fileID: -244636835, guid: d8547a8cc3b310c48aca0dfd73453825, type: 3}

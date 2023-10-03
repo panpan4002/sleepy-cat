@@ -7,6 +7,7 @@ TagManager:
   - Asteroide
   - Inimigo
   - gameOver
+  - Kiwi
   layers:
   - Default
   - TransparentFX
@@ -44,11 +45,11 @@ TagManager:
   - name: Background
     uniqueID: 3290606421
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Foreground
     uniqueID: 116879837
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: UI
     uniqueID: 2122398637
